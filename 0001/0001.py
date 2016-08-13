@@ -14,17 +14,19 @@ import random, string
 获取id:获取16进制的id再转回10进制
 '''
 
-def activation_code(id, length=10):
-	prefix = hex(int(id))[2:] + 'L'
-	length = length - len(prefix)
-	chars = string.ascii_letters + string.digits
-	return prefix + ''.join([random.choice(chars) for i in range(length)])
+KEY_LEN = 20
+KEY_COUNT = 20
 
-def get_id(code):
-	return str(int(code.upper(), 16))
+def base_str():
+	return string.ascii_letters+string.digits
+
+def key_gen(count, result=None):
+	result = []
+	while len(result) < count:
+		key = ''.join([random.choice(base_str()) for i in range(KEY_LEN)])
+		if key not in result: result.append(key)			
+	return result
 
 if __name__ == '__main__':
-	for i in range(10, 500, 35):
-		code = activation_code(i)
-		id_hex = code.split('L')[0]
-		id = get_id(id_hex)
+	for key in key_gen(KEY_COUNT):
+		print(key)
