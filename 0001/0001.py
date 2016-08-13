@@ -14,16 +14,16 @@ import random, string
 获取id:获取16进制的id再转回10进制
 '''
 
-KEY_LEN = 20
+KEY_LEN = 10
 KEY_COUNT = 20
 
 def base_str():
 	return string.ascii_letters+string.digits
 
-def key_gen(count, result=None):
+def key_gen(count, len=KEY_LEN):
 	result = []
 	while len(result) < count:
-		key = ''.join([random.choice(base_str()) for i in range(KEY_LEN)])
+		key = ''.join([random.choice(base_str()) for i in range(len)])
 		if key not in result: result.append(key)			
 	return result
 
